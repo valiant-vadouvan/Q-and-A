@@ -9,10 +9,11 @@ const pool = new Pool({
 
 pool.connect()
   .then(() => console.log(`Connected successfully to postgreSQL`))
-  .then(() => pool.query('SELECT * FROM questions'))
-  .then((data) => console.log(data))
+  // .then(() => pool.query('SELECT * FROM questions'))
+  // .then((data) => console.log(data.rows))
+  // .then((data) => console.table(data.rows))
   .catch((err) => console.log(`error connection: ${err}`))
 // .finally(() => pool.end());
 // console.table(data.rows)
 
-module.export = pool;
+module.exports = pool;

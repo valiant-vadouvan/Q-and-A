@@ -6,7 +6,8 @@ module.exports = {
       if (err) {
         console.log(`${err}`);
       } else {
-        console.log(data);
+        res.send(data.rows);
+        console.log(data.rows);
       }
     })
   },
@@ -15,7 +16,8 @@ module.exports = {
       if (err) {
         console.log(`${err}`);
       } else {
-        console.log(data);
+        res.send(data.rows);
+        console.log(data.rows);
       }
     })
   },
@@ -24,36 +26,9 @@ module.exports = {
       if (err) {
         console.log(`${err}`);
       } else {
-        console.log(data);
+        res.send(data.rows);
+        console.log(data.rows);
       }
     })
   }
 }
-
-// const getQuestions = (req, res) => {
-//   console.log('in controller');
-//   // return new Promise((resolve, reject) => {
-//   //   model.getQuestionsFromDB((err, data) => {
-//   //     if (err) {
-//   //       reject(err);
-//   //     } else {
-//   //       resolve(data);
-//   //     }
-//   //   })
-//   // })
-//   //   .then((data) => {
-//   //     console.table(data.rows);
-//   //     res.send(data);
-//   //   })
-//   //   .catch((err) => {
-//   //     console.log(`Failed to receive results from db: ${err}`);
-//   //     res.status(404).send('not found');
-//   //   })
-//   model.getQuestionsFromDB((err, data) => {
-//     if (err) {
-//       console.log(`${err}`);
-//     } else {
-//       console.table(data.rows);
-//     }
-//   })
-// }

@@ -19,14 +19,14 @@ app.use(express.urlencoded({ extended: true }))
 // ROUTES
 
 // GET QUESTIONS
-// app.get('/', controller.getQuestions);
+app.get('/questions', controller.getQuestions);
 
 
 // // GET ANSWERS
-// app.get('/answers', controller.getAnswers);
+app.get('/answers', controller.getAnswers);
 
 // // GET PHOTOS
-// app.get('/photos', controller.getPhotos);
+app.get('/photos', controller.getPhotos);
 
 // POST QUESTIONS
 // app.post('/photos', async (req, res) => {
@@ -42,9 +42,10 @@ app.use(express.urlencoded({ extended: true }))
 
 // POST PHOTOS
 
-// app.get('/', (req, res) => {
-//   res.send('Hello World!');
-// })
+app.get('/', (req, res) => {
+  console.log('get request received');
+  res.send('Hello World!');
+})
 
 app.listen(port, () => {
   console.log(`Q-and-A listening at http://localhost:${port}`);
