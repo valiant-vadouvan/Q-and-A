@@ -3,7 +3,7 @@ const app = express()
 const path = require('path');
 const port = 3000
 
-const logREquests = (req, res, next) => {
+const logRequests = (req, res, next) => {
   console.log(`Received a ${req.method} request from ${req.path}`);
 }
 
