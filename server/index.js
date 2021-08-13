@@ -19,14 +19,16 @@ app.use(express.urlencoded({ extended: true }))
 // ROUTES
 
 // GET QUESTIONS
-app.get('/questions', controller.getQuestions);
+app.get('/qa/questions', controller.getQuestions);
 
+// GET ANSWERS
+app.get('/qa/answers', controller.getAnswers);
+app.get('/qa/questions/:question_id/answers', controller.getAnswersById);
 
-// // GET ANSWERS
-app.get('/answers', controller.getAnswers);
+// GET PHOTOS
+app.get('/qa/photos', controller.getPhotos);
 
-// // GET PHOTOS
-app.get('/photos', controller.getPhotos);
+app.get('/qa/questions/:question_id/answers/:answers_id/photos', controller.getPhotosById);
 
 // POST QUESTIONS
 // app.post('/photos', async (req, res) => {
