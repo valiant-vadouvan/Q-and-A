@@ -12,7 +12,6 @@ module.exports = {
     })
   },
   getAnswers: (req, res) => {
-    // need to accept id from api request and pass it down to getAnswersFromDB as an argument
     model.getAnswersFromDB((err, data) => {
       if (err) {
         console.log(`${err}`);

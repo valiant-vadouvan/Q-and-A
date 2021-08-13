@@ -17,18 +17,18 @@ app.use(express.json()); // req.body
 app.use(express.urlencoded({ extended: true }))
 
 // ROUTES
+const questionsAPI = '/qa/questions/';
 
 // GET QUESTIONS
-app.get('/qa/questions', controller.getQuestions);
+app.get(questionsAPI, controller.getQuestions);
 
 // GET ANSWERS
 app.get('/qa/answers', controller.getAnswers);
-app.get('/qa/questions/:question_id/answers', controller.getAnswersById);
+app.get(`${questionsAPI}:question_id/answers`, controller.getAnswersById);
 
 // GET PHOTOS
 app.get('/qa/photos', controller.getPhotos);
-
-app.get('/qa/questions/:question_id/answers/:answers_id/photos', controller.getPhotosById);
+app.get(`${questionsAPI}:question_id/answers/:answers_id/photos`, controller.getPhotosById);
 
 // POST QUESTIONS
 // app.post('/photos', async (req, res) => {
