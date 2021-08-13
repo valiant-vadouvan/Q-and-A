@@ -1,4 +1,4 @@
-CREATE DATABSE q_and_a;
+-- CREATE DATABASE q_and_a;
 -- \c into q_and_a database
 CREATE TABLE IF NOT EXISTS questions (
   ID BIGSERIAL NOT NULL PRIMARY KEY,

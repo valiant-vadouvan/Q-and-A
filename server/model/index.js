@@ -1,8 +1,9 @@
 const pool = require('../db');
 
 module.exports = {
-  getQuestionsFromDB: (callback) => {
-    pool.query('SELECT * FROM questions', callback);
+  getQuestionsFromDB: (queryParams, callback) => {
+    // pool.query(`SELECT * FROM questions WHERE product_id = ${queryParams.product_id} limit ${queryParams.count} INNER JOIN ON SELECT * FROM answers WHERE questions.id = answers.questions_id `, callback);
+    pool.query(`SELECT * FROM questions WHERE product_id = ${queryParams.product_id} limit ${queryParams.count}`, callback);
   },
   getAnswersFromDB: (callback) => {
     pool.query('SELECT * FROM answers', callback);

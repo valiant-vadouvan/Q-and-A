@@ -3,7 +3,7 @@ const app = express();
 const pool = require('./db');
 const controller = require('./controller');
 const path = require('path');
-const port = 3000;
+const port = 5000;
 
 // console.log(controller.getQuestions.toString());
 
@@ -41,14 +41,12 @@ app.get(`${questionsAPI}:question_id/answers/:answers_id/photos`, controller.get
 // })
 
 // POST ANSWERS
-
 // POST PHOTOS
 
 app.get('/', (req, res) => {
-  console.log('get request received');
   res.send('Hello World!');
 })
 
 app.listen(port, () => {
-  console.log(`Q-and-A listening at http://localhost:${port}`);
+  console.log(`Q_and_A listening at http://localhost:${port}`);
 })
