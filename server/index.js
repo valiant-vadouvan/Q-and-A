@@ -5,8 +5,6 @@ const controller = require('./controller');
 const path = require('path');
 const port = 5000;
 
-// console.log(controller.getQuestions.toString());
-
 const logRequests = (req, res, next) => {
   console.log(`Received a ${req.method} request from ${req.path}`);
   next();
