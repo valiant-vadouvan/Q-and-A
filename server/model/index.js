@@ -2,47 +2,41 @@ const pool = require('../db');
 
 module.exports = {
   getQuestionsFromDB: (queryParams, callback) => {
-    // pool.query(`SELECT * FROM questions WHERE product_id = ${queryParams.product_id} limit ${queryParams.count} INNER JOIN ON SELECT * FROM answers WHERE questions.id = answers.questions_id `, callback);
-    // pool.query(`SELECT * FROM questions WHERE product_id = ${queryParams.product_id} limit ${queryParams.count}`, callback);
-    let queryRequest = `SELECT product_id,
-      JSON_AGG(
-        JSON_BUILD_OBJECT(
-          'question_id', id,
-          'question-body', body,
-          'question_date', date_written,
-          'asker_name', asker_name,
-          'question_helpfulness', helpfulness,
-          'reported', reported
-        )
-      ) as results
-      FROM questions
-      WHERE product_id = ${queryParams.product_id}
-      GROUP BY product_id
-      limit ${queryParams.count}`
-
-    let queryReq = `SELECT product_id,
-      JSON_AGG(
-        JSON_BUILD_OBJECT(
-          'question_id', id,
-          'question-body', body,
-          'question_date', date_written,
-          'asker_name', asker_name,
-          'question_helpfulness', helpfulness,
-          'reported', reported,
-          'answers', JSON_BUILD_OBJECT(
-            id, JSON_BUILD_OBJECT(
-              'id', id,
-              'body', body
+    let queryRequest = `SELECT q.product_id,
+    JSON_AGG(
+      JSON_BUILD_OBJECT(
+        'question_id', q.id,
+        'question-body', q.body,
+        'question_date', q.date_written,
+        'asker_name', q.asker_name,
+        'question_helpfulness', q.helpfulness,
+        'reported', q.reported,
+        'answers', (
+          SELECT (JSON_OBJECT_AGG(
+            a.id, JSON_BUILD_OBJECT(
+              'id', a.id,
+              'body', a.body,
+              'date', a.date_written,
+              'answerer_name', a.answerer_name,
+              'helpfulness', a.helpfulness,
+              'photos', (
+                SELECT JSON_AGG(
+                  JSON_BUILD_OBJECT(
+                    'id', p.id,
+                    'url', p.photo_url
+                  )
+                ) FROM photos p WHERE p.answer_id = a.id
+              )
             )
-          )
+          )) FROM answers a WHERE a.questions_id = q.id
         )
-      ) as results
-      FROM questions
-      WHERE product_id = ${queryParams.product_id}
-      GROUP BY product_id
-      limit ${queryParams.count}`
-
-    pool.query(queryReq, callback);
+      )
+    ) as results
+    FROM questions q
+    WHERE q.product_id = ${queryParams.product_id}
+    GROUP BY product_id
+    limit ${queryParams.count}`
+    pool.query(queryRequest, callback);
   },
   getAnswersByIdFromDB: (id, callback) => {
     pool.query(`SELECT * FROM answers WHERE questions_id = ${id.question_id}`, callback);

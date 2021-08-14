@@ -20,7 +20,7 @@ module.exports = {
       if (err) {
         console.log(`${err}`);
       } else {
-        res.send(data.rows);
+        res.send(data.rows[0]);
       }
     })
   },
