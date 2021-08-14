@@ -36,10 +36,37 @@ module.exports = {
     WHERE q.product_id = ${queryParams.product_id}
     GROUP BY product_id
     limit ${queryParams.count}`
+
     pool.query(queryRequest, callback);
   },
-  getAnswersByIdFromDB: (id, callback) => {
-    pool.query(`SELECT * FROM answers WHERE questions_id = ${id.question_id}`, callback);
+  getAnswersByIdFromDB: (queryParams, callback) => {
+    let queryRequest = `SELECT (JSON_BUILD_OBJECT(
+      'question', ${queryParams.question_id},
+      'page', ${queryParams.page},
+      'count', ${queryParams.count},
+      'results', (JSON_AGG(
+        JSON_BUILD_OBJECT(
+          'answer_id', a.id,
+          'body', a.body,
+          'date', a.date_written,
+          'answerer_name', a.answerer_name,
+          'helpfulness', a.helpfulness,
+          'photos', (
+            SELECT JSON_AGG(
+              JSON_BUILD_OBJECT(
+                'id', p.id,
+                'url', p.photo_url
+              )
+            ) FROM photos p WHERE p.answer_id = a.id
+          )
+        )
+      ))
+    ))
+    FROM answers a
+    WHERE a.questions_id = ${queryParams.question_id}
+    limit ${queryParams.count}`
+
+    pool.query(queryRequest, callback);
   },
   getPhotosByIdFromDB: (id, callback) => {
     pool.query(`SELECT * from photos WHERE answer_id = ${id.answers_id}`, callback);

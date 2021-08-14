@@ -1,4 +1,5 @@
--- CREATE DATABASE q_and_a;
+CREATE DATABASE q_and_a;
+\ c q_and_a;
 CREATE TABLE IF NOT EXISTS questions (
   ID BIGSERIAL NOT NULL PRIMARY KEY,
   product_id INT NOT NULL,
@@ -6,7 +7,7 @@ CREATE TABLE IF NOT EXISTS questions (
   date_written VARCHAR(30) NOT NULL,
   asker_name VARCHAR(30) NOT NULL,
   asker_email VARCHAR(50) NOT NULL,
-  reported SMALLINT,
+  reported VARCHAR(5),
   helpfulness INT
 );
 CREATE TABLE IF NOT EXISTS answers (
@@ -16,7 +17,7 @@ CREATE TABLE IF NOT EXISTS answers (
   date_written VARCHAR(30) NOT NULL,
   answerer_name VARCHAR(30) NOT NULL,
   answerer_email VARCHAR(50) NOT NULL,
-  reported BOOLEAN,
+  reported VARCHAR(5),
   helpfulness SMALLINT,
   FOREIGN KEY (questions_id) REFERENCES questions(id)
 );
@@ -26,6 +27,7 @@ CREATE TABLE IF NOT EXISTS photos (
   photo_url VARCHAR(200),
   FOREIGN KEY (answer_id) REFERENCES answers(id)
 );
+-- load database
 COPY questions (
   id,
   product_id,
@@ -50,3 +52,7 @@ COPY answers (
 FROM '/Users/seanpark/desktop/answers.csv' DELIMITER ',' CSV HEADER;
 COPY photos(id, answer_id, photo_url)
 FROM '/Users/seanpark/desktop/answers_photos.csv' DELIMITER ',' CSV HEADER;
+UPDATE questions
+SET reported = 'true'
+WHERE reported = 1;
+-- CREATE INDEX productID_index ON reviews (product_id);
