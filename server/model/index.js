@@ -28,7 +28,13 @@ module.exports = {
           'question_date', date_written,
           'asker_name', asker_name,
           'question_helpfulness', helpfulness,
-          'reported', reported
+          'reported', reported,
+          'answers', JSON_BUILD_OBJECT(
+            id, JSON_BUILD_OBJECT(
+              'id', id,
+              'body', body
+            )
+          )
         )
       ) as results
       FROM questions
