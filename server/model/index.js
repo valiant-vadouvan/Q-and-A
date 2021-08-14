@@ -2,8 +2,7 @@ const pool = require('../db');
 
 module.exports = {
   getQuestionsFromDB: (queryParams, callback) => {
-    let queryRequest = `SELECT q.product_id,
-    JSON_AGG(
+    let queryRequest = `SELECT (JSON_AGG(
       JSON_BUILD_OBJECT(
         'question_id', q.id,
         'question-body', q.body,
@@ -24,27 +23,16 @@ module.exports = {
                   JSON_BUILD_OBJECT(
                     'id', p.id,
                     'url', p.photo_url
-                  )
-                ) FROM photos p WHERE p.answer_id = a.id
-              )
-            )
-          )) FROM answers a WHERE a.questions_id = q.id
-        )
-      )
-    ) as results
-    FROM questions q
-    WHERE q.product_id = ${queryParams.product_id}
-    GROUP BY product_id
-    limit ${queryParams.count}`
+                )) FROM photos p WHERE p.answer_id = a.id
+          )))) FROM answers a WHERE a.questions_id = q.id
+        )))) FROM questions q
+        WHERE q.product_id = ${queryParams.product_id}
+        limit ${queryParams.count}`
 
     pool.query(queryRequest, callback);
   },
   getAnswersByIdFromDB: (queryParams, callback) => {
-    let queryRequest = `SELECT (JSON_BUILD_OBJECT(
-      'question', ${queryParams.question_id},
-      'page', ${queryParams.page},
-      'count', ${queryParams.count},
-      'results', (JSON_AGG(
+    let queryRequest = `SELECT (JSON_AGG(
         JSON_BUILD_OBJECT(
           'answer_id', a.id,
           'body', a.body,
@@ -61,7 +49,6 @@ module.exports = {
           )
         )
       ))
-    ))
     FROM answers a
     WHERE a.questions_id = ${queryParams.question_id}
     limit ${queryParams.count}`

@@ -17,13 +17,14 @@ module.exports = {
     if (req.query.product_id) {
       queryParams.product_id = req.query.product_id;
     }
+
     model.getQuestionsFromDB(queryParams, (err, data) => {
       if (err) {
         console.log(`${err}`);
       } else {
         res.send({
           product_id: queryParams.product_id,
-          results: data.rows[0]
+          results: data.rows[0].json_agg
         })
       }
     })
@@ -44,7 +45,12 @@ module.exports = {
       if (err) {
         console.log(`${err}`);
       } else {
-        res.send(data.rows[0].json_build_object);
+        res.send({
+          question: queryParams.question_id,
+          page: Number(queryParams.page),
+          count: Number(queryParams.count),
+          results: data.rows[0].json_agg
+        })
       }
     })
   },
