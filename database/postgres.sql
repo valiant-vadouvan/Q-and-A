@@ -1,5 +1,4 @@
 -- CREATE DATABASE q_and_a;
--- \c into q_and_a database
 CREATE TABLE IF NOT EXISTS questions (
   ID BIGSERIAL NOT NULL PRIMARY KEY,
   product_id INT NOT NULL,
@@ -27,3 +26,27 @@ CREATE TABLE IF NOT EXISTS photos (
   photo_url VARCHAR(200),
   FOREIGN KEY (answer_id) REFERENCES answers(id)
 );
+COPY questions (
+  id,
+  product_id,
+  body,
+  date_written,
+  asker_name,
+  asker_email,
+  reported,
+  helpfulness
+)
+FROM '/Users/seanpark/desktop/questions.csv' DELIMITER ',' CSV HEADER;
+COPY answers (
+  id,
+  questions_id,
+  body,
+  date_written,
+  answerer_name,
+  answerer_email,
+  reported,
+  helpfulness
+)
+FROM '/Users/seanpark/desktop/answers.csv' DELIMITER ',' CSV HEADER;
+COPY photos(id, answer_id, photo_url)
+FROM '/Users/seanpark/desktop/answers_photos.csv' DELIMITER ',' CSV HEADER;

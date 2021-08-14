@@ -23,11 +23,9 @@ const questionsAPI = '/qa/questions/';
 app.get(questionsAPI, controller.getQuestions);
 
 // GET ANSWERS
-app.get('/qa/answers', controller.getAnswers);
 app.get(`${questionsAPI}:question_id/answers`, controller.getAnswersById);
 
 // GET PHOTOS
-app.get('/qa/photos', controller.getPhotos);
 app.get(`${questionsAPI}:question_id/answers/:answers_id/photos`, controller.getPhotosById);
 
 // POST QUESTIONS

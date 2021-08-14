@@ -2,8 +2,8 @@ const model = require('../model');
 
 module.exports = {
   getQuestions: (req, res) => {
-    var queryParams = {
-      product_id: '1',
+    const queryParams = {
+      product_id: '5',
       page: '1',
       count: '5'
     }
@@ -24,16 +24,6 @@ module.exports = {
       }
     })
   },
-  getAnswers: (req, res) => {
-    model.getAnswersFromDB((err, data) => {
-      if (err) {
-        console.log(`${err}`);
-      } else {
-        res.send(data.rows);
-        console.log(data.rows);
-      }
-    })
-  },
   getAnswersById: (req, res) => {
     model.getAnswersByIdFromDB(req.params, (err, data) => {
       if (err) {
@@ -42,16 +32,6 @@ module.exports = {
         const result = data.rows;
         res.send(result);
         console.log(result);
-      }
-    })
-  },
-  getPhotos: (req, res) => {
-    model.getPhotosFromDB((err, data) => {
-      if (err) {
-        console.log(`${err}`);
-      } else {
-        res.send(data.rows);
-        console.log(data.rows);
       }
     })
   },
