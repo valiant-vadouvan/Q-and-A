@@ -93,15 +93,24 @@ module.exports = {
     })
   },
   markQuestionHelpful: (req, res) => {
-    const question_id = req.params.question_id
-
-    // console.log(question_id)
-
-    model.markQuestionHelpfulinDB(question_id, (err) => {
+    const question_id = req.params.question_id;
+    model.markQuestionHelpfulInDB(question_id, (err) => {
       if (err) {
         console.log(`${err}`);
+        res.status(500).send('put request to mark question as helpful failed')
       } else {
         res.status(200).send('successfully marked question as helpful');
+      }
+    })
+  },
+  reportQuestion: (req, res) => {
+    const question_id = req.params.question_id;
+    model.reportQuestionInDB(question_id, (err) => {
+      if (err) {
+        console.log(`${err}`);
+        res.status(500).send('put request to report question failed');
+      } else {
+        res.status(200).send('sucessfully reported question');
       }
     })
   }

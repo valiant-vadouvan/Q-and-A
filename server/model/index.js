@@ -61,8 +61,13 @@ module.exports = {
   postQuestionsToDB: (data, queryParams, callback) => {
     console.log(data);
   },
-  markQuestionHelpfulinDB: (id, callback) => {
+  markQuestionHelpfulInDB: (id, callback) => {
     let queryRequest = `UPDATE questions SET helpfulness = helpfulness + 1 WHERE id = ${id}`
     pool.query(queryRequest, callback);
-  }
+  },
+  reportQuestionInDB: (id, callback) => {
+    let queryRequest = `UPDATE questions SET reported = true WHERE ID = ${id}`
+    pool.query(queryRequest, callback);
+  },
+
 }
