@@ -27,8 +27,8 @@ app.get(`${questionsAPI}:question_id/answers`, controller.getAnswersById);
 // GET PHOTOS
 app.get(`${questionsAPI}:question_id/answers/:answers_id/photos`, controller.getPhotosById);
 
-// // ADD QUESTION
-// app.post(questionsAPI, controller.postQuestions);
+// ADD QUESTION
+app.post(questionsAPI, controller.postQuestions);
 
 // // ADD ANSWER
 // app.post(`${questionsAPI}:questions_id/answers`, controller.postAnswers);

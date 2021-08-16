@@ -84,9 +84,10 @@ module.exports = {
       queryParams.product_id = req.query.product_id;
     }
 
-    model.postQuestionsToDB(req.body, queryParams, (err) => {
+    model.postQuestionsToDB(queryParams, (err) => {
       if (err) {
         console.log(`${err}`);
+        res.status(500).send('post request to add a question failed')
       } else {
         res.status(200);
       }

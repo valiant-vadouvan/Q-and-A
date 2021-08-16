@@ -58,8 +58,13 @@ module.exports = {
   getPhotosByIdFromDB: (id, callback) => {
     pool.query(`SELECT * from photos WHERE answer_id = ${id.answers_id}`, callback);
   },
-  postQuestionsToDB: (data, queryParams, callback) => {
-    console.log(data);
+  postQuestionsToDB: (queryParams, callback) => {
+    const body = queryParams.body;
+    const name = queryParams.name;
+    const email = queryParams.email;
+    const product_id = queryParams.product_id;
+    let queryRequest = `INSERT INTO questions(product_id, body, date_written, asker_name, asker_email, reported, helpfulness) VALUES (${product_id}, '${body}', current_timestamp, '${name}', '${email}', false, 0)`;
+    pool.query(queryRequest, callback);
   },
   markQuestionHelpfulInDB: (id, callback) => {
     let queryRequest = `UPDATE questions SET helpfulness = helpfulness + 1 WHERE id = ${id}`;
