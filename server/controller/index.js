@@ -101,7 +101,7 @@ module.exports = {
       if (err) {
         console.log(`${err}`);
       } else {
-        res.status(200);
+        res.status(200).send('successfully marked question as helpful');
       }
     })
   }

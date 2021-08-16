@@ -62,6 +62,7 @@ module.exports = {
     console.log(data);
   },
   markQuestionHelpfulinDB: (id, callback) => {
-
+    let queryRequest = `UPDATE questions SET helpfulness = helpfulness + 1 WHERE id = ${id}`
+    pool.query(queryRequest, callback);
   }
 }
