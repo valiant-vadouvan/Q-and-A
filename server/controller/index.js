@@ -113,5 +113,16 @@ module.exports = {
         res.status(200).send('sucessfully reported question');
       }
     })
+  },
+  markAnswerHelpful: (req, res) => {
+    const answer_id = req.params.answer_id;
+    model.markAnswerHelpfulInDB(answer_id, (err) => {
+      if (err) {
+        console.log(`${err}`);
+        res.status(500).send('put request to mark answer helpful failed');
+      } else {
+        res.status(200).send('sucessfully marked answer helpful');
+      }
+    })
   }
 };

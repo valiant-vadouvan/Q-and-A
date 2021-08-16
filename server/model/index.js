@@ -51,7 +51,7 @@ module.exports = {
       ))
     FROM answers a
     WHERE a.questions_id = ${queryParams.question_id}
-    limit ${queryParams.count}`
+    limit ${queryParams.count}`;
 
     pool.query(queryRequest, callback);
   },
@@ -62,12 +62,16 @@ module.exports = {
     console.log(data);
   },
   markQuestionHelpfulInDB: (id, callback) => {
-    let queryRequest = `UPDATE questions SET helpfulness = helpfulness + 1 WHERE id = ${id}`
+    let queryRequest = `UPDATE questions SET helpfulness = helpfulness + 1 WHERE id = ${id}`;
     pool.query(queryRequest, callback);
   },
   reportQuestionInDB: (id, callback) => {
     let queryRequest = `UPDATE questions SET reported = true WHERE ID = ${id}`
     pool.query(queryRequest, callback);
   },
+  markAnswerHelpfulInDB: (id, callback) => {
+    let queryRequest = `UPDATE answers SET helpfulness = helpfulness + 1 WHERE id = ${id}`;
+    pool.query(queryRequest, callback);
+  }
 
 }
