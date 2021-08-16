@@ -30,8 +30,8 @@ app.get(`${questionsAPI}:question_id/answers/:answers_id/photos`, controller.get
 // ADD QUESTION
 app.post(questionsAPI, controller.postQuestions);
 
-// // ADD ANSWER
-// app.post(`${questionsAPI}:questions_id/answers`, controller.postAnswers);
+// ADD ANSWER
+app.post(`${questionsAPI}:question_id/answers`, controller.postAnswers);
 
 // MARK QUESTION AS HELPFUL
 app.put(`${questionsAPI}:question_id/helpful`, controller.markQuestionHelpful);
@@ -44,7 +44,6 @@ app.put(`${answersAPI}:answer_id/helpful`, controller.markAnswerHelpful);
 
 // REPORT ANSWER
 app.put(`${answersAPI}:answer_id/report`, controller.reportAnswer);
-
 
 app.get('/', (req, res) => {
   res.send('Hello World!');

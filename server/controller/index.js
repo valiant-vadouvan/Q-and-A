@@ -29,6 +29,7 @@ module.exports = {
       }
     })
   },
+
   getAnswersById: (req, res) => {
     const queryParams = {
       question_id: req.params.question_id,
@@ -54,6 +55,7 @@ module.exports = {
       }
     })
   },
+
   getPhotosById: (req, res) => {
     model.getPhotosByIdFromDB(req.params, (err, data) => {
       if (err) {
@@ -63,6 +65,7 @@ module.exports = {
       }
     })
   },
+
   postQuestions: (req, res) => {
     const queryParams = {
       body: 'defaultBody',
@@ -93,6 +96,39 @@ module.exports = {
       }
     })
   },
+
+  postAnswers: (req, res) => {
+    const queryParams = {
+      question_id: req.params.question_id,
+      body: 'defaultBody',
+      name: 'defaultName',
+      email: 'defaultEmail',
+      photos: 'defaultURL',
+    }
+
+    if (req.query.body) {
+      queryParams.body = req.query.body;
+    }
+    if (req.query.name) {
+      queryParams.name = req.query.name;
+    }
+    if (req.query.email) {
+      queryParams.email = req.query.email;
+    }
+    if (req.query.photos) {
+      queryParams.photos = req.query.photos;
+    }
+
+    model.postAnswersToDB(queryParams, (err) => {
+      if (err) {
+        console.log(`${err}`);
+        res.status(500).send('post request to add answer failed');
+      } else {
+        res.status(200).send('post request to add answer successful');
+      }
+    })
+  },
+
   markQuestionHelpful: (req, res) => {
     const question_id = req.params.question_id;
     model.markQuestionHelpfulInDB(question_id, (err) => {
@@ -104,6 +140,7 @@ module.exports = {
       }
     })
   },
+
   reportQuestion: (req, res) => {
     const question_id = req.params.question_id;
     model.reportQuestionInDB(question_id, (err) => {
@@ -115,6 +152,7 @@ module.exports = {
       }
     })
   },
+
   markAnswerHelpful: (req, res) => {
     const answer_id = req.params.answer_id;
     model.markAnswerHelpfulInDB(answer_id, (err) => {
@@ -126,6 +164,7 @@ module.exports = {
       }
     })
   },
+
   reportAnswer: (req, res) => {
     const answer_id = req.params.answer_id;
     model.reportAnswerInDB(answer_id, (err) => {
