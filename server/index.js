@@ -42,8 +42,8 @@ app.put(`${questionsAPI}:question_id/report`, controller.reportQuestion);
 // MARK ANSWER AS HELPFUL
 app.put(`${answersAPI}:answer_id/helpful`, controller.markAnswerHelpful);
 
-// // REPORT ANSWER
-// app.put(`${answersAPI}:answer_id/report`, controller.reportAnswer);
+// REPORT ANSWER
+app.put(`${answersAPI}:answer_id/report`, controller.reportAnswer);
 
 
 app.get('/', (req, res) => {

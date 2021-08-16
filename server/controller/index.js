@@ -124,5 +124,16 @@ module.exports = {
         res.status(200).send('sucessfully marked answer helpful');
       }
     })
+  },
+  reportAnswer: (req, res) => {
+    const answer_id = req.params.answer_id;
+    model.reportAnswerInDB(answer_id, (err) => {
+      if (err) {
+        console.log(`${err}`);
+        res.status(500).send('put request to report answer failed');
+      } else {
+        res.status(200).send('sucessfully reported answer');
+      }
+    })
   }
 };

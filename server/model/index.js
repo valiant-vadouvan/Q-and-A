@@ -72,6 +72,9 @@ module.exports = {
   markAnswerHelpfulInDB: (id, callback) => {
     let queryRequest = `UPDATE answers SET helpfulness = helpfulness + 1 WHERE id = ${id}`;
     pool.query(queryRequest, callback);
+  },
+  reportAnswerInDB: (id, callback) => {
+    let queryRequest = `UPDATE answers SET reported = true WHERE id = ${id}`;
+    pool.query(queryRequest, callback);
   }
-
 }
