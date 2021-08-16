@@ -36,8 +36,8 @@ app.get(`${questionsAPI}:question_id/answers/:answers_id/photos`, controller.get
 // MARK QUESTION AS HELPFUL
 app.put(`${questionsAPI}:question_id/helpful`, controller.markQuestionHelpful);
 
-// //REPORT QUESTION
-// app.put(`${questionsAPI}:question_id/report`, controller.reportQuestion);
+//REPORT QUESTION
+app.put(`${questionsAPI}:question_id/report`, controller.reportQuestion);
 
 // // MARK ANSWER AS HELPFUL
 // app.put(`${answersAPI}:answer_id/helpful`, controller.markAnswerHelpful);
