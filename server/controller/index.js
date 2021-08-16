@@ -62,5 +62,47 @@ module.exports = {
         res.send(data.rows);
       }
     })
+  },
+  postQuestions: (req, res) => {
+    const queryParams = {
+      body: '',
+      name: '',
+      email: '',
+      product_id: '1'
+    }
+
+    if (req.query.body) {
+      queryParams.body = req.query.body;
+    }
+    if (req.query.name) {
+      queryParams.name = req.query.name;
+    }
+    if (req.query.email) {
+      queryParams.email = req.query.email;
+    }
+    if (req.query.product_id) {
+      queryParams.product_id = req.query.product_id;
+    }
+
+    model.postQuestionsToDB(req.body, queryParams, (err) => {
+      if (err) {
+        console.log(`${err}`);
+      } else {
+        res.status(200);
+      }
+    })
+  },
+  markQuestionHelpful: (req, res) => {
+    const question_id = req.params.question_id
+
+    // console.log(question_id)
+
+    model.markQuestionHelpfulinDB(question_id, (err) => {
+      if (err) {
+        console.log(`${err}`);
+      } else {
+        res.status(200);
+      }
+    })
   }
 };

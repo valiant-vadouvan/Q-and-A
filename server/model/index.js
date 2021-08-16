@@ -57,5 +57,11 @@ module.exports = {
   },
   getPhotosByIdFromDB: (id, callback) => {
     pool.query(`SELECT * from photos WHERE answer_id = ${id.answers_id}`, callback);
+  },
+  postQuestionsToDB: (data, queryParams, callback) => {
+    console.log(data);
+  },
+  markQuestionHelpfulinDB: (id, callback) => {
+
   }
 }

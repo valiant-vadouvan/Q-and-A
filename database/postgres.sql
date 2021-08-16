@@ -51,6 +51,13 @@ COPY answers (
 FROM '/Users/seanpark/desktop/answers.csv' DELIMITER ',' CSV HEADER;
 COPY photos(id, answer_id, photo_url)
 FROM '/Users/seanpark/desktop/answers_photos.csv' DELIMITER ',' CSV HEADER;
+-- CREAT INDEX
+CREATE INDEX productID on questions(product_id);
+CREATE INDEX questionID on questions(id);
+CREATE INDEX answerID on answers(id);
+CREATE INDEX questionsID on answers(questions_id);
+CREATE INDEX answersID on photos(answer_id);
+CREATE INDEX photoID on photos(id);
 -- CREATE INDEX productId_index ON questions (question)
 -- UPDATE questions SET reported = 'true' WHERE reported = 1;
 -- CREATE INDEX productID_index ON reviews (product_id);
