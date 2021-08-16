@@ -66,6 +66,7 @@ module.exports = {
     const name = queryParams.name;
     const email = queryParams.email;
     const product_id = Number(queryParams.product_id);
+
     let queryRequest = `INSERT INTO questions(product_id, body, date_written, asker_name, asker_email, reported, helpfulness) VALUES (${product_id}, '${body}', current_timestamp, '${name}', '${email}', false, 0)`;
     pool.query(queryRequest, callback);
   },
@@ -76,7 +77,7 @@ module.exports = {
     const name = queryParams.name;
     const email = queryParams.email;
     const photos = queryParams.photos;
-    // let queryJoin = `SELECT * FROM answers JOIN photos on answers.id = photos.answer_id`
+
     let queryRequest = `INSERT INTO answers(questions_id, body, date_written, answerer_name, answerer_email, reported, helpfulness) VALUES (${question_id}, '${body}', current_timestamp, '${name}', '${email}', false, 0)`;
     let queryRequest2 = `INSERT INTO photos(answer_id, photo_url) VALUES ((SELECT id from answers order by id desc limit 1), '${photos}')`;
     pool.query(queryRequest)
