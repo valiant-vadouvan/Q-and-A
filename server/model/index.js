@@ -62,7 +62,7 @@ module.exports = {
     const body = queryParams.body;
     const name = queryParams.name;
     const email = queryParams.email;
-    const product_id = queryParams.product_id;
+    const product_id = Number(queryParams.product_id);
     let queryRequest = `INSERT INTO questions(product_id, body, date_written, asker_name, asker_email, reported, helpfulness) VALUES (${product_id}, '${body}', current_timestamp, '${name}', '${email}', false, 0)`;
     pool.query(queryRequest, callback);
   },

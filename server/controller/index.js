@@ -65,9 +65,9 @@ module.exports = {
   },
   postQuestions: (req, res) => {
     const queryParams = {
-      body: '',
-      name: '',
-      email: '',
+      body: 'defaultBody',
+      name: 'defaultName',
+      email: 'defaultEmail',
       product_id: '1'
     }
 
@@ -89,7 +89,7 @@ module.exports = {
         console.log(`${err}`);
         res.status(500).send('post request to add a question failed')
       } else {
-        res.status(200);
+        res.status(200).send('post request to add question successful');
       }
     })
   },
