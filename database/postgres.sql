@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS answers (
   answerer_name VARCHAR(30) NOT NULL,
   answerer_email VARCHAR(50) NOT NULL,
   reported BOOLEAN,
-  helpfulness SMALLINT,
+  helpfulness INT,
   FOREIGN KEY (questions_id) REFERENCES questions(id)
 );
 CREATE TABLE IF NOT EXISTS photos (
