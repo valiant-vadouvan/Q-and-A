@@ -6,7 +6,7 @@ module.exports = {
       JSON_BUILD_OBJECT(
         'question_id', q.id,
         'question-body', q.body,
-        'question_date', q.date_written,
+        'question_date', to_timestamp(q.date_written/1000),
         'asker_name', q.asker_name,
         'question_helpfulness', q.helpfulness,
         'reported', q.reported,
@@ -15,7 +15,7 @@ module.exports = {
             a.id, JSON_BUILD_OBJECT(
               'id', a.id,
               'body', a.body,
-              'date', a.date_written,
+              'date', to_timestamp(a.date_written/1000),
               'answerer_name', a.answerer_name,
               'helpfulness', a.helpfulness,
               'photos', (
@@ -37,7 +37,7 @@ module.exports = {
         JSON_BUILD_OBJECT(
           'answer_id', a.id,
           'body', a.body,
-          'date', a.date_written,
+          'date', to_timestamp(a.date_written/1000),
           'answerer_name', a.answerer_name,
           'helpfulness', a.helpfulness,
           'photos', (

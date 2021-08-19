@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS questions (
   ID BIGSERIAL NOT NULL PRIMARY KEY,
   product_id INT NOT NULL,
   body VARCHAR(1000) NOT NULL,
-  date_written TEXT NOT NULL,
+  date_written BIGINT NOT NULL,
   asker_name VARCHAR(30) NOT NULL,
   asker_email VARCHAR(50) NOT NULL,
   reported BOOLEAN,
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS answers (
   ID BIGSERIAL NOT NULL PRIMARY KEY,
   questions_id INT NOT NULL,
   body VARCHAR(1000) NOT NULL,
-  date_written TEXT NOT NULL,
+  date_written BIGINT NULL,
   answerer_name VARCHAR(30) NOT NULL,
   answerer_email VARCHAR(50) NOT NULL,
   reported BOOLEAN,
@@ -80,8 +80,15 @@ SELECT pg_catalog.setval(
       FROM photos
     ) + 1
   );
+ALTER TABLE questions
+ALTER COLUMN date_written TYPE BIGINT USING date_written::bigint;
+ALTER TABLE answers
+ALTER COLUMN date_written TYPE BIGINT USING date_written::bigint;
 -- CREATE INDEX productId_index ON questions (question)
 -- UPDATE questions SET reported = 'true' WHERE reported = 1;
 -- CREATE INDEX productID_index ON reviews (product_id);
 -- ALTER TABLE skus ADD INDEX style_skus (styleId);
 -- CREATE INDEX [index name] ON [table name] (COLUMN NAME);
+DROP TABLE photos;
+DROP TABLE answers;
+DROP TABLE questions;

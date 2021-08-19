@@ -5,14 +5,14 @@ import { sleep } from 'k6';
 // let CounterErrors = new Counter('Errors');
 
 export let options = {
-  // vus: 100,
-  // duration: '1s',
+  vus: 10,
+  duration: '1s',
 
-  stages: [
-    { duration: '1s', target: 10 },
-    { duration: '2s', target: 100 },
-    { duration: '1s', target: 1 },
-  ]
+  // stages: [
+  //   { duration: '1s', target: 10 },
+  //   { duration: '2s', target: 100 },
+  //   { duration: '1s', target: 1 },
+  // ]
 
   // Stress test
   // base line
@@ -88,12 +88,12 @@ export default function () {
   http.batch([
     ['GET', `${API_BASE_URL}/qa/questions`],
     ['GET', `${API_BASE_URL}/qa/questions/1/answers`],
-    ['POST', `${API_BASE_URL}/qa/questions/`],
-    ['POST', `${API_BASE_URL}/qa/questions/1/answers`],
-    ['PUT', `${API_BASE_URL}/qa/questions/1/helpful`],
-    ['PUT', `${API_BASE_URL}/qa/questions/1/report`],
-    ['PUT', `${API_BASE_URL}/qa/answers/1/helpful`],
-    ['PUT', `${API_BASE_URL}/qa/answers/1/report`],
+    // ['POST', `${API_BASE_URL}/qa/questions/`],
+    // ['POST', `${API_BASE_URL}/qa/questions/1/answers`],
+    // ['PUT', `${API_BASE_URL}/qa/questions/1/helpful`],
+    // ['PUT', `${API_BASE_URL}/qa/questions/1/report`],
+    // ['PUT', `${API_BASE_URL}/qa/answers/1/helpful`],
+    // ['PUT', `${API_BASE_URL}/qa/answers/1/report`],
   ]);
 
   sleep(1);
