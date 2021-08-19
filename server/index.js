@@ -3,7 +3,7 @@ const app = express();
 const pool = require('./db');
 const controller = require('./controller');
 const path = require('path');
-const port = 5000;
+const port = 3000;
 
 const logRequests = (req, res, next) => {
   console.log(`Received a ${req.method} request from ${req.path}`);
